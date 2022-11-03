@@ -1,0 +1,41 @@
+ private void exitDialog(Activity activity)
+    {
+        final Dialog exitDialog = new Dialog(IntroActivity.this);
+        exitDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        exitDialog.setCancelable(false);
+        exitDialog.setContentView(R.layout.ext_dlg_dzn);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widthLcl = (int) (displayMetrics.widthPixels*0.7f);
+//        int heightLcl = (int) (displayMetrics.heightPixels*0.9f);
+        LinearLayout bedLcl = exitDialog.findViewById(R.id.bed);
+        FrameLayout.LayoutParams paramsLcl = (FrameLayout.LayoutParams)
+                bedLcl.getLayoutParams();
+        paramsLcl.width = widthLcl;
+//        paramsLcl.height =heightLcl ;
+        paramsLcl.gravity = Gravity.CENTER;
+        Window window = getWindow();
+        bedLcl.setLayoutParams(paramsLcl);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView cancel = exitDialog.findViewById(R.id.exit_btn);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitDialog.dismiss();
+            }
+        });
+
+        TextView yesBtn = exitDialog.findViewById(R.id.yes_btn);
+        yesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+            }
+        });
+
+
+
+        exitDialog.show();
+
+    }
